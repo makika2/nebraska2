@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Színmátrix Demo</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+
+<script type="text/babel">
+    const { useState } = React;
+
+    const ColorSetMatrixDemo = () => {
+        const [colors, setColors] = useState({
+            layer1: '#ffffff',
+            layer2: '#ffffff',
+            layer3: '#ffffff'
+        });
+
+        const [selectedSets, setSelectedSets] = useState({
+            layer1: '1.árkategória',
+            layer2: '2.árkategória',
+            layer3: '3.árkategória'
+        });
+
+        const colorSets = {
+            "1.árkategória": {
+                name: "1. árkategória",
+                colors: [
+                    [
+					{ value: '#E8E1D1', name: 'Lotus 01 bézs zsákvászon' },
+					{ value: '#8B7162', name: 'Lotus 02 középbarna' },
+					{ value: '#5D4439', name: 'Lotus 03 barna zsákvászon' },
+					{ value: '#362F2A', name: 'Lotus 04 sötétbarna zsákvászon' },
+					{ value: '#C62828', name: 'Lotus 05 piros zsákvászon' },
+					{ value: '#D35F1D', name: 'Lotus 06 narancssárga' },
+					{ value: '#808080', name: 'Lotus 09 szürke zsákvászon' },
+					{ value: '#786559', name: 'Lotus 10 szürkésbarna' },
+					{ value: '#B39B82', name: 'Lotus 11 világosbarna' },
+					]
+                ]
+            },
+            "2.árkategória": {
+                name: "2. árkategória",
+                colors: [
+                    [
+					{ value: '#D0D0D0', name: 'Faro 01 világos szürke' },
+					{ value: '#D2C4B0', name: 'Faro 02 világos barna' },
+					{ value: '#B8B8B8', name: 'Faro 03 közép szürke' },
+					{ value: '#A0A0A0', name: 'Faro 04 szürke' },
+					{ value: '#806A5A', name: 'Faro 05 sötét barna' },
+					{ value: '#4A5048', name: 'Faro 06 grafit' },
+					{ value: '#2F4A2F', name: 'Faro 07 sötét zöld' },
+					{ value: '#3B7A7A', name: 'Faro 08 türkiz' },
+					{ value: '#4A6A8A', name: 'Faro 09 kék' }
+					],
+                    [
+					{ value: '#9AC0AA', name: 'Faro 10 zöld' },
+					{ value: '#E6A495', name: 'Faro 11 korall' },
+					{ value: '#E6C850', name: 'Faro 12 sárga' },
+					{ value: '#A890A8', name: 'Faro 13 lila' },
+					{ value: '#E6C0B5', name: 'Faro 14 rózsaszín' },
+					{ value: '#1A324A', name: 'Faro 15 sötét kék' },
+					{ value: '#E6E6E6', name: 'Faro 16 szürke' },
+					{ value: '#686868', name: 'Faro 17 grafit' },
+					{ value: '#E6DED2', name: 'Faro 18 bézs' }
+					],
+                    [
+					{ value: '#F0E8DC', name: 'Faro 19 krém' },
+					{ value: '#C0B5A8', name: 'Faro 20 sötét bézs' },
+					{ value: '#8A7260', name: 'Faro 21 barna' },
+					{ value: '#B0B0B0', name: 'Faro 22 szürke' },
+					{ value: '#989898', name: 'Faro 23 szürke' },
+					{ value: '#404040', name: 'Faro 24 grafit' },
+					{ value: '#E8E0D0', name: 'Look 01 homok szövet' },
+					{ value: '#998877', name: 'Look 03 szürkésbarna szövet' },
+					{ value: '#D4C0A0', name: 'Look 04 világosbarna szövet' }
+					],
+                    [
+					{ value: '#553322', name: 'Look 05 sötétbarna szövet' },
+					{ value: '#D6D6D6', name: 'Look 08 világosszürke szövet' },
+					{ value: '#C8C8C8', name: 'Look 09 szürke szövet' },
+					{ value: '#909090', name: 'Look 10 acél szövet' },
+					{ value: '#686868', name: 'Look 11 sötétszürke szövet' },
+					{ value: '#202020', name: 'Look 12 fekete szövet' },
+					{ value: '#FF5522', name: 'Look 13 narancssárga szövet' },
+					{ value: '#FFB5AA', name: 'Look 16 rózsaszín szövet' },
+					{ value: '#E6C850', name: 'Look 17 sárga szövet' }
+					],					
+                    [
+					{ value: '#88AA44', name: 'Look 19 sárgászöld szövet' },
+					{ value: '#006688', name: 'Look 23 kék szövet' },
+					{ value: '#D8D0C0', name: 'Nápoly 01 bézs zsákszövet' },
+					{ value: '#998877', name: 'Nápoly 02 barna zsákszövet' },
+					{ value: '#554433', name: 'Nápoly 03 sötétbarna' },
+					{ value: '#889088', name: 'Nápoly 04 szürke zsákszövet' },
+					{ value: '#202020', name: 'Nápoly 05 fekete zsákszövet' },
+					{ value: '#FFFFFF', name: '' },
+					{ value: '#FFFFFF', name: '' }
+					]
+                ]
+            },
+            "3.árkategória": {
+                name: "3. árkategória",
+                colors: [
+                    [
+					{ value: '#1A1A1A', name: 'Rosto 100 fekete' },
+					{ value: '#D5CCBE', name: 'Rosto 13 szürkés bézs' },
+					{ value: '#C5BDB3', name: 'Rosto 21 sötét bézs' },
+					{ value: '#BAB3A9', name: 'Rosto 23 bézs' },
+					{ value: '#665957', name: 'Rosto 24 sötét barna' },
+					{ value: '#745F4E', name: 'Rosto 28 barna' },
+					{ value: '#A8C0B0', name: 'Rosto 34 menta' },
+					{ value: '#9B9A57', name: 'Rosto 35 zöld' },
+					{ value: '#C19B4E', name: 'Rosto 40 mustár' }
+					],
+                    [
+					{ value: '#D5844B', name: 'Rosto 41 narancs' },
+					{ value: '#E35D3F', name: 'Rosto 51 vérnarancs' },
+					{ value: '#CC3333', name: 'Rosto 60 piros' },
+					{ value: '#E6C3C3', name: 'Rosto 61 púder' },
+					{ value: '#8B6B7D', name: 'Rosto 65 lila' },
+					{ value: '#4A5A6B', name: 'Rosto 76 szürkés kék' },
+					{ value: '#B2B2B2', name: 'Rosto 83 szürke' },
+					{ value: '#45877C', name: 'Rosto 86 türkiz' },
+					{ value: '#999999', name: 'Rosto 90 szürke' }
+					],
+                    [
+					{ value: '#4D4545', name: 'Rosto 91 szürkés barna' },
+					{ value: '#808080', name: 'Rosto 93 szürke' },
+					{ value: '#4A4141', name: 'Rosto 95 szürkés barna' },
+					{ value: '#3D3535', name: 'Rosto 96 szürkés barna' },
+					{ value: '#2B3333', name: 'Rosto 97 grafit' },
+					{ value: '#FFFFFF', name: '' },
+					{ value: '#FFFFFF', name: '' },
+					{ value: '#FFFFFF', name: '' },
+					{ value: '#FFFFFF', name: '' }
+					]
+                ]
+            },
+            "4.árkategória": {
+                name: "4. árkategória",
+                colors: [
+                    [
+					{ value: '#D5CCCA', name: 'Doha 02 drapp szövet' },
+					{ value: '#8B6B65', name: 'Doha 03 barna szövet' },
+					{ value: '#4A3835', name: 'Doha 04 sötétbarna szövet' },
+					{ value: '#2A8B8B', name: 'Doha 08 türkiz szövet' },
+					{ value: '#C5C5C5', name: 'Doha 10 ezüst szövet' },
+					{ value: '#888888', name: 'Doha 11 szürke szövet' },
+					{ value: '#252525', name: 'Doha 12 fekete szövet' },
+					{ value: '#2A2A2A', name: 'Element 01 grafit állatbarát szövet' },
+					{ value: '#3A3A3A', name: 'Element 02 sötétszürke' }
+					],
+                    [
+					{ value: '#857F7A', name: 'Element 03 szürke állatbarát szövet' },
+					{ value: '#A5A5A5', name: 'Element 04 világosszürke' },
+					{ value: '#756B63', name: 'Element 05 szürkésbarna' },
+					{ value: '#9B8579', name: 'Element 06 világosbarna' },
+					{ value: '#8B5D3B', name: 'Element 07 bronz állatbarát szövet' },
+					{ value: '#C69C3B', name: 'Element 08 barnássárga' },
+					{ value: '#A65D42', name: 'Element 09 tégla állatbarát szövet' },
+					{ value: '#965B65', name: 'Element 10 sötét rózsaszín állatbarát' },
+					{ value: '#4A563B', name: 'Element 11 zöld állatbarát szövet' }
+					],
+                    [
+					{ value: '#1E3328', name: 'Element 12 sötétzöld állatbarát' },
+					{ value: '#1B2838', name: 'Element 13 sötétkék állatbarát szövet' },
+					{ value: '#2B4F5E', name: 'Element 14 azúrkék állatbarát szövet' },
+					{ value: '#3B7B7B', name: 'Element 15 türkiz állatbarát szövet' },
+					{ value: '#B5BDC5', name: 'Element 16 halványkék' },
+					{ value: '#E8D5B8', name: 'Soft 02 homok textilbőr' },
+					{ value: '#E5EBE5', name: 'Soft 05 menta textilbőr' },
+					{ value: '#989A6B', name: 'Soft 06 zöld textilbőr' },
+					{ value: '#646853', name: 'Soft 07 olíva textilbőr' }
+					],
+                    [
+					{ value: '#8B9AA8', name: 'Soft 08 világoskék textilbőr' },
+					{ value: '#2B365A', name: 'Soft 09 kék textilbőr' },
+					{ value: '#A81818', name: 'Soft 10A piros textilbőr' },
+					{ value: '#171717', name: 'Soft 11 fekete textilbőr' },
+					{ value: '#C6A32B', name: 'Soft 12 mustár textilbőr' },
+					{ value: '#989A3B', name: 'Soft 13 sárgászöld textilbőr' },
+					{ value: '#A65D42', name: 'Soft 14 tégla textilbőr' },
+					{ value: '#634832', name: 'Soft 15 barna textilbőr' },
+					{ value: '#E8E4D8', name: 'Soft 18 ekrü textilbőr' }
+					],
+                    [
+					{ value: '#4A4A4A', name: 'Soft 20 szürke textilbőr' },
+					{ value: '#8B4B56', name: 'Soft 28 lila textilbőr' },
+					{ value: '#4A4A4A', name: 'Soft 29 elefánt textilbőr' },
+					{ value: '#F5F5F5', name: 'Soft 31 fehér textilbőr' },
+					{ value: '#2A2A2A', name: 'Soft 32 grafit textilbőr' },
+					{ value: '#3B2A2A', name: 'Soft 66 gesztenye textilbőr' },
+					{ value: '#FFFFFF', name: '' },
+					{ value: '#FFFFFF', name: '' },
+					{ value: '#FFFFFF', name: '' }
+					]
+                ]
+            },
+            "5.árkategória": {
+                name: "5. árkategória",
+                colors: [
+                    [
+					{ value: '#1D4A2D', name: "D'Oro 5101 Zöld" },
+					{ value: '#2C3D4A', name: "D'Oro 5103 Sötét kék" },
+					{ value: '#2C3033', name: "D'Oro 5104 Antracit" },
+					{ value: '#9B6D6D', name: "D'Oro 5106 Rózsaszín" },
+					{ value: '#D5CCCA', name: "D'Oro 5107 Bézs" },
+					{ value: '#4A4A4A', name: "D'Oro 5109 Szürke" },
+					{ value: '#2A2A2A', name: "D'Oro 5110 Szén" },
+					{ value: '#4A403C', name: "D'Oro 5111 Szürkés barna" },
+					{ value: '#D5CCC0', name: "D'Oro 5114 Krém" }
+					],
+                    [
+					{ value: '#3C2A20', name: "D'Oro 5118 Csokoládé" },
+					{ value: '#8C8C8C', name: "Naomi 3402 Szürke" },
+					{ value: '#B2B2B2', name: "Naomi 3403 Hamu" },
+					{ value: '#707070', name: "Naomi 3405 Szürke" },
+					{ value: '#3C444A', name: "Naomi 3406 Grafit" },
+					{ value: '#BFB3A6', name: "Naomi 3418 Taupe" },
+					{ value: '#BFA68C', name: "Naomi 3419 Világos barna" },
+					{ value: '#2D3C2A', name: "Naomi 3423 Zöld" },
+					{ value: '#8C5733', name: "Naomi 3424 Aranybarna" }
+					],
+                    [
+					{ value: '#BC8C8C', name: "Naomi 3426 Korall" },
+					{ value: '#8C6D59', name: "Naomi 3427 Bronz" },
+					{ value: '#E5DED5', name: "Serta 01 bézs" },
+					{ value: '#D5CCC0', name: "Serta 02 sötét bézs" },
+					{ value: '#C9C2B8', name: "Serta 03 szürkés bézs" },
+					{ value: '#B8A69D', name: "Serta 04 világos barna" },
+					{ value: '#59443C', name: "Serta 05 sötét barna" },
+					{ value: '#4A3326', name: "Serta 06 espresso" },
+					{ value: '#8C995C', name: "Serta 07 oliva" }
+					],
+                    [
+					{ value: '#D5CC8C', name: "Serta 08 pasztel sárga" },
+					{ value: '#99B8B8', name: "Serta 09 világos türkiz" },
+					{ value: '#4A5966', name: "Serta 10 szürkés kék" },
+					{ value: '#D5D5D5', name: "Serta 11 platina" },
+					{ value: '#999999', name: "Serta 12 szürke" },
+					{ value: '#666666', name: "Serta 13 grafit" },
+					{ value: '#333333', name: "Serta 14 antracit" },
+					{ value: '#8C7A8C', name: "Serta 15 lila" },
+					{ value: '#E5CCCC', name: "Serta 16 púder" }
+					],
+                    [
+					{ value: '#BFB3BF', name: "Serta 17 levendula" },
+					{ value: '#4A8C8C', name: "Serta 18 türkiz" },
+					{ value: '#2D4A33', name: "Serta 19 zöld" },
+					{ value: '#BF9933', name: "Serta 20 mustár" },
+					{ value: '#E5B8B2', name: "Serta 21 lazac" },
+					{ value: '#CC8C8C', name: "Serta 22 paszel piros" },
+					{ value: '#FFFFFF', name: '' },
+					{ value: '#FFFFFF', name: '' },
+					{ value: '#FFFFFF', name: '' }
+					]
+                ]
+            },
+            "6.árkategória": {
+                name: "6. árkategória",
+                colors: [
+                    [
+					{ value: '#E8E3DC', name: "Cortina 01 Bézs" },
+					{ value: '#D8D3CC', name: "Cortina 02 Sötét bézs" },
+					{ value: '#C5BAA7', name: "Cortina 03 Világos barna" },
+					{ value: '#8B7355', name: "Cortina 04 Közép barna" },
+					{ value: '#584A3A', name: "Cortina 05 Sötét barna" },
+					{ value: '#808080', name: "Cortina 16 Szürke" },
+					{ value: '#4A545C', name: "Cortina 17 Kékes szürke" },
+					{ value: '#2C2C2C', name: "Indigo 01 sötétszürke szövet" },
+					{ value: '#696969', name: "Indigo 02 szürke szövet" }
+					],
+                    [
+					{ value: '#B8B8B8', name: "Indigo 03 világosszürke szövet" },
+					{ value: '#9F8E85', name: "Indigo 04 szürkésbarna szövet" },
+					{ value: '#8B6D5C', name: "Indigo 10 barna szövet" },
+					{ value: '#D2691E', name: "Indigo 11 narancs szövet" },
+					{ value: '#DAA520', name: "Indigo 12 sárga szövet" },
+					{ value: '#B22222', name: "Indigo 13 piros szövet" },
+					{ value: '#1E4B7A', name: "Indigo 14 kék szövet" },
+					{ value: '#6E99C0', name: "Indigo 15 világoskék szövet" },
+					{ value: '#FFFFFF', name: '' }
+					]
+                ]
+            }
+        };
+
+        const getColorName = (hexColor) => {
+            for (const setKey in colorSets) {
+                const colorSet = colorSets[setKey];
+                for (const row of colorSet.colors) {
+                    for (const color of row) {
+                        if (color.value.toLowerCase() === hexColor.toLowerCase()) {
+                            return color.name;
+                        }
+                    }
+                }
+            }
+            return "Ismeretlen szín";
+        };
+		
+		const layerNames = {
+			1: 'Korpusz',
+			2: 'Ülés',
+			3: 'Párnák'
+		};
+
+        const ColorMatrix = ({ selectedColor, onColorSelect, layerNum, colorSet, onSetChange }) => (
+            <div className="space-y-2">
+                <div className="flex items-center gap-4 mb-2">
+                    <label className="block text-sm font-medium whitespace-nowrap">
+						{layerNames[layerNum]} {/* Itt jelenik meg a réteg neve */}
+                    </label>
+                    <select
+                        value={colorSet}
+                        onChange={(e) => onSetChange(e.target.value)}
+                        className="p-1 border rounded text-sm flex-1"
+                    >
+                        {Object.entries(colorSets).map(([key, set]) => (
+                            <option key={key} value={key}>{set.name}</option>
+                        ))}
+                    </select>
+                </div>
+                
+                <div className="grid grid-cols-9 gap-1">
+                    {colorSets[colorSet].colors.flat().map((color, index) => (
+                        <button
+                            key={index}
+                            className={`w-6 h-6 rounded-sm border-2 transition-transform hover:scale-110 ${
+                                selectedColor === color.value ? 'border-blue-500 shadow-lg scale-105' : 'border-gray-200'
+                            }`}
+                            style={{ backgroundColor: color.value }}
+                            onClick={() => onColorSelect(color.value)}
+                            title={color.name}
+                        />
+                    ))}
+                </div>
+            </div>
+        );
+		
+            return (
+                <div className="w-full h-full p-4 bg-white rounded-lg shadow-lg">
+                    <div className="flex gap-6">
+                        <div className="w-1/3 space-y-6 bg-gray-50 p-4 rounded-lg">
+                            <h3 className="text-lg font-medium mb-4">Rétegek színezése</h3>
+                            {[3, 2, 1].map((layerNum) => (
+                                <ColorMatrix
+                                    key={layerNum}
+                                    selectedColor={colors[`layer${layerNum}`]}
+                                    onColorSelect={(color) => 
+                                        setColors(prev => ({...prev, [`layer${layerNum}`]: color}))
+                                    }
+                                    layerNum={layerNum}
+                                    colorSet={selectedSets[`layer${layerNum}`]}
+                                    onSetChange={(set) => 
+                                        setSelectedSets(prev => ({...prev, [`layer${layerNum}`]: set}))
+                                    }
+                                />
+                            ))}
+                            
+                    	    <div className="mt-6 pt-4 border-t">
+                        	    <h4 className="text-sm font-medium mb-2">Kiválasztott színek:</h4>
+	                            <div className="space-y-2">
+        	                        {[3, 2, 1].map((layerNum) => (
+                	                    <div key={layerNum} className="flex items-center gap-2">
+                        	                <div
+                                	            className="w-4 h-4 rounded border"
+                                        	    style={{ backgroundColor: colors[`layer${layerNum}`] }}
+	                                        />
+        	                                <span className="text-xs text-gray-600">
+                	                            {getColorName(colors[`layer${layerNum}`])}
+                        	                </span>
+                                	    </div>
+	                                ))}
+        	                    </div>
+                	     </div>
+                        </div>
+
+                <div className="w-2/3 flex flex-col">
+                    <div className="relative w-full" style={{ paddingTop: '56.25%' }}>
+                        <div className="absolute inset-0 rounded-lg overflow-hidden">
+                            {/* Alap réteg */}
+                            <img 
+                                src="room_bty_ao2.png" 
+                                className="absolute inset-0 w-full h-full object-cover"
+                                alt="Base layer"
+								style={{ backgroundColor: 'white' }}
+                            />
+                            
+                            {/* Színezett rétegek */}
+                            {['corpus_ao2.png', 'sitter_ao2.png', 'pillow_ao2.png'].map((src, index) => (
+                                <div
+                                    key={index}
+                                    className="absolute inset-0">
+									<img
+												src={src} 
+												className="absolute inset-0 w-full h-full object-cover"
+												alt={`Layer ${index + 1}`}
+												style={{  // Alap réteg
+													mixBlendMode: 'normal',
+													opacity: 1,
+													filter: 'brightness(1.2)' // Fényerő növelése 20%-kal
+												}}
+									/>
+									
+									{/* Maszkolt színezett réteg */}
+									<div
+										className="absolute inset-0"
+										style={{
+											mixBlendMode: 'multiply', // Multiply keverési mód
+											backgroundColor: colors[`layer${index + 1}`],
+											maskImage: `url(${src})`, // Alfa csatornás kép
+											maskSize: 'contain',
+											maskRepeat: 'no-repeat',
+											maskPosition: 'center',
+											WebkitMaskImage: `url(${src})`, // Webkit böngészők számára
+											WebkitMaskSize: 'contain',
+											WebkitMaskRepeat: 'no-repeat',
+											WebkitMaskPosition: 'center',
+										}}
+									/>
+								</div>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                        <h4 className="text-sm font-medium mb-2">Rétegek felépítése:</h4>
+                        <ol className="text-sm text-gray-600 list-decimal list-inside">
+                            <li>Párnák (pillow_ao.png)</li>
+							<li>Ülőfelület (sitter_ao.png)</li>
+                            <li>Korpusz (corpus_ao.png)</li>
+							<li>Háttér (room_bty.png)</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<ColorSetMatrixDemo />);
+</script>
+
+</body>
+</html>
